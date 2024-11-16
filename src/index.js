@@ -163,7 +163,9 @@ function endGame(){
 
     // Disable the input field after the game ends.
     inputField.style.display = 'none';
-        
+     // Calculate the final WPM
+    const wpm = calculateWPM();
+
     // Calculate the final accuracy
     const accuracy =  Math.floor((correctCharacters / totalCharacters) * 100);
         
