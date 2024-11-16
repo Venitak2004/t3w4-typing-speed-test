@@ -39,6 +39,7 @@ body {
     border-radius: 10%;
 
 
+
 }
 .play-button:hover {
     background-color: pink;
@@ -47,5 +48,5 @@ body {
 
 .timer-display {
     color: pink;
-    
+
 }

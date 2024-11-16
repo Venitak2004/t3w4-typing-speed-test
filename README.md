@@ -5,4 +5,4 @@ Features:
 - Typing Input
 - Read - Time stats (WPM and accuracy)
 - Countdown timer
-- Quality of life imporovements
+- Quality of life improvements

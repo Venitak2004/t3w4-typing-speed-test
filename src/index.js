@@ -6,15 +6,13 @@ let startTime;
 let timer=10; // Time in seconds (adjustable)
 let timerInterval;
 
-
-
 // Element Selectors
 const playButton = document.getElementById("playButton");
 const sentenceDisplay = document.getElementById("sentenceDisplay");
 const inputField = document.getElementById("inputField");
 const resultsSection = document.getElementById("resultsSection");
 const timerDisplay = document.getElementById("timerDisplay");
-
+const restartButton = document.getElementById("restartButton");
 
 // Sentence Fetching
 async function getRandomSentence(wordCount){
@@ -40,6 +38,7 @@ async function displaySentence() {
 // Event Listeners
 playButton.addEventListener('click', startGame);
 inputField.addEventListener('input', trackTyping);
+restartButton.addEventListener('click', restartGame);
 
 // Start the game.
 function startGame() {
@@ -56,18 +55,22 @@ function startGame() {
     inputField.style.display = 'block';
     sentenceDisplay.style.display = 'block';
     timerDisplay.style.display = 'block';
+    playButton.style.display = 'none';
+    restartButton.style.display = 'block';
+    restartButton.style.margin = 'auto';
+    
 }
 
 function startTimer() {
     timerInterval = setInterval(() => {
     if (timer > 0) {
         timer --;
-        timerDisplay.textContent = `Time Left: ${timer}'s`;
+        timerDisplay.innerText = `Time Left: ${timer}'s`;
     }
     else {
         endGame();
     }
-    }, 1000);
+    }, 1000);// 1000ms = 1 second
 
 }
 
@@ -127,6 +130,31 @@ function calculateWPM(){
     wpm = Math.floor((correctCharacters / 5) /  (timeElapsed / 60));
     console.log("Words Per Min: ", wpm);
     return wpm
+}
+
+
+// Restart Game functionality
+function restartGame(){
+    // Reset Game variables and UI elements
+    correctCharacters = 0
+    totalCharacters = 0
+    startTime = null;
+    
+    // Reset timer
+    timer = 10;
+    clearInterval(timerInterval);
+
+    // Resent and enable input field value
+    inputField.value = '';
+    inputField.style.display = 'block';
+
+    // Display the new sentance and reset other UI elements
+    displaySentence();
+    resultsSection.innerHTML = '';
+    timerDisplay.textContent = `Time Left: ${timer}'s`;
+    playButton.style.display = 'none';
+
+
 }
 
 function endGame(){
